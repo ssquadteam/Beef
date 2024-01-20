@@ -1,7 +1,7 @@
 <img src="beef.png" alt="Beef logo" align="right" width="200">
 <div align="center">
 
-## Beef
+## Beef (Pufferfish Fork)
 
 [![Github Actions Build](https://img.shields.io/github/actions/workflow/status/Winds-Studio/Leaf/build-1204.yml?&style=for-the-badge)](https://github.com/The-Fafnir/Beef/releases)
 
