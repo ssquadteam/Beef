@@ -1,4 +1,4 @@
-<img src="beef.png" alt="Leaf logo" align="right" width="200">
+<img src="beef.png" alt="Beef logo" align="right" width="200">
 <div align="center">
 
 ## Beef
