@@ -71,4 +71,3 @@ Thanks to these projects below. Leaf just mix some of their patches together. If
 - [Plazma](https://github.com/PlazmaMC/PlazmaBukkit)
 - [SparklyPaper](https://github.com/SparklyPower/SparklyPaper)
 - [Polpot](https://github.com/PolpotMC/Polpot) (R.I.P.)
-
