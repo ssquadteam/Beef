@@ -3,7 +3,7 @@
 
 ## Beef (Pufferfish Fork)
 
-[![Github Actions Build](https://media.discordapp.net/attachments/1077644334347866222/1198643023194624030/build-passing.png?ex=65bfa64e&is=65ad314e&hm=45d9c5f0e765264f87edd1b3e16ef87fd326ed48aeadde36a0e90a5820e07096&=&format=webp&quality=lossless)](https://github.com/The-Fafnir/Beef/releases)
+[![Github Actions Build](https://img.shields.io/github/actions/workflow/status/The-Farfin/Beef/build-1204.yml?&style=for-the-badge)](https://github.com/The-Fafnir/Beef/releases)
 
 <h5>Beef is an experimental performance fork with bleeding-edge patches designed for exceptionally high-performance built on top of <a href="https://github.com/Winds-Studio/Leaf">Leaf</a> with optimization from other forks.</h5>
 <h8>Logo designed by <a href="https://minecraft.net/">Mojang</a> duh</h8>
