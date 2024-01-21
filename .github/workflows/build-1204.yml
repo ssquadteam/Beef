@@ -1,4 +1,4 @@
-name: Build Leaf 1.20.4
+name: Build Beef 1.20.4
 on: [ push, pull_request ]
 jobs:
   build:
@@ -24,20 +24,20 @@ jobs:
         run: ./gradlew -Dorg.gradle.jvmargs="-Dgraal.CompilerConfiguration=enterprise -Dgraal.UsePriorityInlining=true -Dgraal.Vectorization=true -Dgraal.OptDuplication=true --add-modules jdk.incubator.vector" createReobfPaperclipJar --stacktrace --no-daemon
 
       - name: Rename Paperclip Jar
-        run: mv build/libs/leaf-paperclip-1.20.4-R0.1-SNAPSHOT-reobf.jar ./leaf-1.20.4.jar
+        run: mv build/libs/beef-paperclip-1.20.4-R0.1-SNAPSHOT-reobf.jar ./beef-1.20.4.jar
 
-      - name: Upload Leaf
+      - name: Upload Beef
         uses: actions/upload-artifact@main
         with:
-          name: Leaf 1.20.4
-          path: ./leaf-1.20.4.jar
+          name: Beef 1.20.4
+          path: ./beef-1.20.4.jar
 
-      - name: Release Leaf
+      - name: Release Beef
         if: github.ref_name == 'ver/1.20.4' && contains(github.event.commits[0].message, '[Release]')
         uses: marvinpinto/action-automatic-releases@master
         with:
-          title: "Leaf 1.20.4"
+          title: "Beef 1.20.4"
           automatic_release_tag: "ver-1.20.4"
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          files: "./leaf-1.20.4.jar"
+          files: "./beef-1.20.4.jar"
           prerelease: false
