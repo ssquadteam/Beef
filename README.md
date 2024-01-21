@@ -10,13 +10,13 @@
 </div>
 
 ## Features
- - **Fork of [Leaf](https://github.com/Winds-Studio/Leaf)** for better performance.
+ - **ASync Path-Finding** relying on features of [Petal](https://github.com/Bloom-host/Petal).
  - **Allows all characters as usernames**, including Bangla and other characters.
  - **Allows** players to connect the backend under proxy without enabling bunngecord mode.
  - **Allows tripwire dupe** by reverting tripwire bugfix patch of Paper.
  - **Configurable UseItem distance** for anarchy server.
  - **Latest dependencies**, keeping all dependencies in the newest version.
- - **More customized** relying on features of [Purpur](https://github.com/PurpurMC/Purpur).
+ - **More customization options** relying on features of [Purpur](https://github.com/PurpurMC/Purpur).
  - **Maintenance friendly**, integrating with [Sentry](https://sentry.io/welcome/) of [Pufferfish](https://github.com/pufferfish-gg/Pufferfish) to easy track all errors coming from your server in excruciating detail.
  - **Various optimization** blending from [other forks](https://github.com/The-Fafnir/Beef#credits).
  - **Better Region Format** Support for the Linear region file format from [LinearPurpur](https://github.com/StupidCraft/LinearPurpur)
