@@ -5,8 +5,8 @@
 
 [![Github Actions Build](https://img.shields.io/github/actions/workflow/status/Winds-Studio/Leaf/build-1204.yml?&style=for-the-badge)](https://github.com/The-Fafnir/Beef/releases)
 
-<h5>Beef is a drop-in replacement designed for removing some checks, customized, and high-performance built on top of <a href="https://github.com/Winds-Studio/Leaf">Leaf</a> with optimization from other forks.</h5>
-<h8>Logo designed by <a href="https://minecraft.net/">Mojang Duh</a></h8>
+<h5>Beef is an experimental performance fork with bleeding-edge patches designed for exceptionally high-performance built on top of <a href="https://github.com/Winds-Studio/Leaf">Leaf</a> with optimization from other forks.</h5>
+<h8>Logo designed by <a href="https://minecraft.net/">Mojang</a> duh</h8>
 </div>
 
 ## Features
