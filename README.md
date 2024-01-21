@@ -51,7 +51,7 @@ Also see [PaperMC/Paper](https://github.com/PaperMC/Paper) and [PaperMC/Paperwei
 
 Credits:
 -------------
-Thanks to these projects below. Leaf just mix some of their patches together. If these excellent projects haven't appeared, Leaf will not be great.
+Thanks to these projects below. If these excellent projects hadn't appeared, Beef would not have been so great.
 
 - [Leaf](https://github.com/Winds-Studio/Leaf)
 - [Gale](https://github.com/GaleMC/Gale)
