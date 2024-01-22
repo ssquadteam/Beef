@@ -33,8 +33,8 @@ index 80a196442edbc6b4eb44bb6a405100871aea2f6a..d6db0ecadf840fd0957f4a7da92ca78c
 @@ -165,8 +165,10 @@ public class LeafConfig {
      }
  
-     public static String serverModName = "Leaf";
-+    public static String serverGuiName = "Leaf Minecraft server";
+     public static String serverModName = "Beef";
++    public static String serverGuiName = "Beef Minecraft server";
      private static void serverModName() {
          serverModName = getString("server-mod-name", serverModName);
 +        serverGuiName = getString("server-Gui-name", serverGuiName);
