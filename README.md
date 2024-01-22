@@ -29,7 +29,7 @@
 
 ## Downloads
 
-As it is now fairly stable. Reobf Jars can be found at the [Releases Tab](https://github.com/The-Fafnir/Beef/releases)
+As Beef is now fairly stable, Reobf Jars can be found at the [Releases Tab](https://github.com/The-Fafnir/Beef/releases)
 
 
 ## Building
