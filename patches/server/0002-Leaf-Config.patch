@@ -111,9 +111,9 @@ index 0000000000000000000000000000000000000000..d924db6378b2c60c7b96cf5c45a6d50a
 +
 +        getString("info.version", "1.2");
 +        setComment("info",
-+                "Leaf Config",
-+                "Github Repo: https://github.com/Winds-Studio/Leaf",
-+                "Discord: dreeam___ | QQ: 2682173972");
++                "Beef Config",
++                "Github Repo: https://github.com/The-Fafnir/Beef",
++                "Discord: .thefafnir");
 +
 +        for (Method method : LeafConfig.class.getDeclaredMethods()) {
 +            if (Modifier.isStatic(method.getModifiers()) && Modifier.isPrivate(method.getModifiers()) && method.getParameterCount() == 0 &&
