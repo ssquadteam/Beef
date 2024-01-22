@@ -27,7 +27,7 @@ index 9299d2fe1cda71b6881fd8bd65d3d74b1189a196..80a196442edbc6b4eb44bb6a40510087
          return builder.build();
      }
  
-+    public static String serverModName = "Leaf";
++    public static String serverModName = "Beef";
 +    private static void serverModName() {
 +        serverModName = getString("server-mod-name", serverModName);
 +    }
