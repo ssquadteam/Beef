@@ -25,6 +25,7 @@
 ## Contact
 
 - 📫 Discord: `.thefafnir`
+- 📫 Support Server: `https://discord.gg/Rjp3YpGG6Z`
 
 
 ## Downloads
