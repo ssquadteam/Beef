@@ -1,3 +1,5 @@
+import java.util.Locale
+
 pluginManagement {
     repositories {
         gradlePluginPortal()
@@ -6,8 +8,8 @@ pluginManagement {
 }
 
 rootProject.name = "beef"
-for (name in listOf("Leaf-API", "Leaf-Server", "paper-api-generator")) {
-    val projName = name.lowercase()
+for (name in listOf("Leaf-API", "Leaf-Server")) {
+    val projName = name.lowercase(Locale.ENGLISH)
     include(projName)
     findProject(":$projName")!!.projectDir = file(name)
 }

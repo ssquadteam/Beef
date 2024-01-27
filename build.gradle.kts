@@ -15,7 +15,7 @@ repositories {
 }
 
 dependencies {
-    remapper("net.fabricmc:tiny-remapper:0.10.0:fat")
+    remapper("net.fabricmc:tiny-remapper:0.8.11:fat")
     decompiler("org.vineflower:vineflower:1.9.3")
     paperclip("io.papermc:paperclip:3.0.4-SNAPSHOT")
 }
@@ -73,13 +73,6 @@ paperweight {
 
             serverPatchDir.set(layout.projectDirectory.dir("patches/server"))
             serverOutputDir.set(layout.projectDirectory.dir("Leaf-Server"))
-        }
-
-        patchTasks.register("generatedApi") {
-            isBareDirectory = true
-            upstreamDirPath = "paper-api-generator/generated"
-            patchDir = layout.projectDirectory.dir("patches/generated-api")
-            outputDir = layout.projectDirectory.dir("paper-api-generator/generated")
         }
     }
 }

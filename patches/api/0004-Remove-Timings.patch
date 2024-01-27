@@ -2916,6 +2916,17 @@ index 9d4f553c04784cca63901a56a7aea62a5cae1d72..0f96873eff87ea267f9c1875b3893f35
      private static boolean inRange(int i, int j, int k) {
          return i >= j && i <= k;
      }
+diff --git a/src/main/java/org/bukkit/command/MessageCommandSender.java b/src/main/java/org/bukkit/command/MessageCommandSender.java
+index 9d263ab3afb938c215c0b64d9171345fca6ceb2c..b2c9d86956179b77a43f95f13727a79c114476a7 100644
+--- a/src/main/java/org/bukkit/command/MessageCommandSender.java
++++ b/src/main/java/org/bukkit/command/MessageCommandSender.java
+@@ -1,5 +1,5 @@
+ package org.bukkit.command;
+-
++// Dreeam - TODO: need check
+ import org.bukkit.Bukkit;
+ import org.bukkit.Server;
+ import org.bukkit.permissions.Permission;
 diff --git a/src/main/java/org/bukkit/command/SimpleCommandMap.java b/src/main/java/org/bukkit/command/SimpleCommandMap.java
 index e43d0e0a2c5edfcc82a677b6c4db9314006c9bf4..68fafa73d2e8d832acc7ce47591477749128b007 100644
 --- a/src/main/java/org/bukkit/command/SimpleCommandMap.java
@@ -3006,7 +3017,7 @@ index 899d67fa782fac639fe7fb096e05c551d75bd647..4e93f49d1c54f3b061be456c0b8f11aa
  
      // Paper start
 diff --git a/src/main/java/org/bukkit/plugin/java/JavaPluginLoader.java b/src/main/java/org/bukkit/plugin/java/JavaPluginLoader.java
-index f7266e3991d991e7d7b38752ed472bc9cfa5f43c..b0848fe63f9c6f7f19ce5a4c11d0cbb6d3ba7eef 100644
+index f7266e3991d991e7d7b38752ed472bc9cfa5f43c..74e4abd3766d905280da0a53ce7e4d98e90e7690 100644
 --- a/src/main/java/org/bukkit/plugin/java/JavaPluginLoader.java
 +++ b/src/main/java/org/bukkit/plugin/java/JavaPluginLoader.java
 @@ -39,11 +39,9 @@ import org.bukkit.plugin.PluginDescriptionFile;
@@ -3021,15 +3032,7 @@ index f7266e3991d991e7d7b38752ed472bc9cfa5f43c..b0848fe63f9c6f7f19ce5a4c11d0cbb6
  import org.yaml.snakeyaml.error.YAMLException;
  
  /**
-@@ -239,7 +237,6 @@ public final class JavaPluginLoader implements PluginLoader {
-         Preconditions.checkArgument(plugin != null, "Plugin can not be null");
-         Preconditions.checkArgument(listener != null, "Listener can not be null");
- 
--        boolean useTimings = server.getPluginManager().useTimings();
-         Map<Class<? extends Event>, Set<RegisteredListener>> ret = new HashMap<Class<? extends Event>, Set<RegisteredListener>>();
-         Set<Method> methods;
-         try {
-@@ -300,7 +297,7 @@ public final class JavaPluginLoader implements PluginLoader {
+@@ -300,7 +298,7 @@ public final class JavaPluginLoader implements PluginLoader {
                  }
              }
  
@@ -3038,7 +3041,7 @@ index f7266e3991d991e7d7b38752ed472bc9cfa5f43c..b0848fe63f9c6f7f19ce5a4c11d0cbb6
                  @Override
                  public void execute(@NotNull Listener listener, @NotNull Event event) throws EventException { // Paper
                      try {
-@@ -314,12 +311,8 @@ public final class JavaPluginLoader implements PluginLoader {
+@@ -314,12 +312,8 @@ public final class JavaPluginLoader implements PluginLoader {
                          throw new EventException(t);
                      }
                  }

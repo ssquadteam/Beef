@@ -3,18 +3,16 @@ From: Dreeam <61569423+Dreeam-qwq@users.noreply.github.com>
 Date: Mon, 17 Jul 2023 08:31:51 +0800
 Subject: [PATCH] Purpur: Configurable server mod name
 
-Original license: MIT
-Original project: https://github.com/PurpurMC/Purpur
 
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 2e8c390a0b1a4342bfdfca5bee3a2eeef2ac9beb..3e38c0b186d49ecb8e3408f7c005da37cc64e1c9 100644
+index 995dd071082e482785448678b9189f0715a75308..ee53c964c86e281120958aa0d2a7e1b7ca9d070f 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
-@@ -1842,7 +1842,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1689,7 +1689,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
  
      @DontObfuscate
      public String getServerModName() {
--        return "Gale"; // Gale - branding changes - Gale > // Paper - Paper > // Spigot - Spigot > // CraftBukkit - cb > vanilla!
+-        return "Beef"; // Gale - branding changes - Gale > // Paper - Paper > // Spigot - Spigot > // CraftBukkit - cb > vanilla!
 +        return org.dreeam.leaf.LeafConfig.serverModName; // Leaf - Leaf > // Gale - branding changes - Gale > // Paper - Paper > // Spigot - Spigot > // CraftBukkit - cb > vanilla!
      }
  
