@@ -1,0 +1,228 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Dreeam <61569423+Dreeam-qwq@users.noreply.github.com>
+Date: Wed, 12 Oct 2022 10:42:15 -0400
+Subject: [PATCH] Leaf Config
+
+
+diff --git a/build.gradle.kts b/build.gradle.kts
+index 936c738fcaa8e97c36d0742d2398d63c20cd2f68..830161ffd2f109cc5bd78a59e3b42eed382f8de5 100644
+--- a/build.gradle.kts
++++ b/build.gradle.kts
+@@ -56,6 +56,13 @@ dependencies {
+     runtimeOnly("org.apache.maven.resolver:maven-resolver-connector-basic:1.9.18")
+     runtimeOnly("org.apache.maven.resolver:maven-resolver-transport-http:1.9.18")
+ 
++    // Pufferfish start
++    implementation("org.yaml:snakeyaml:2.2")
++    implementation("com.github.Carleslc.Simple-YAML:Simple-Yaml:1.8.4") {
++        exclude(group = "org.yaml", module = "snakeyaml")
++    }
++    // Pufferfish end
++
+     testImplementation("io.github.classgraph:classgraph:4.8.47") // Paper - mob goal test
+     testImplementation("org.junit.jupiter:junit-jupiter:5.10.0")
+     testImplementation("org.hamcrest:hamcrest:2.2")
+diff --git a/src/main/java/co/aikar/timings/TimingsExport.java b/src/main/java/co/aikar/timings/TimingsExport.java
+index 429cff43a9f0c74161fdab857f5d45771f774ac2..0756ee94251620d591cd11e935c579559afab589 100644
+--- a/src/main/java/co/aikar/timings/TimingsExport.java
++++ b/src/main/java/co/aikar/timings/TimingsExport.java
+@@ -301,8 +301,9 @@ public class TimingsExport extends Thread {
+             pair("bukkit", mapAsJSON(Bukkit.spigot().getBukkitConfig(), null)),
+             // Gale start - Gale configuration - include in timings
+             pair("paper", mapAsJSON(Bukkit.spigot().getPaperConfig(), null)),
+-            pair("gale", mapAsJSON(Bukkit.spigot().getGaleConfig(), null))
++            pair("gale", mapAsJSON(Bukkit.spigot().getGaleConfig(), null)),
+             // Gale end - Gale configuration - include in timings
++            pair("leaf", mapAsJSON(org.dreeam.leaf.LeafConfig.getConfigCopy(), null)) // Leaf
+         ));
+ 
+         new TimingsExport(listeners, parent, history).start();
+diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
+index c51081e9e60003e116c21d628a8aec4d6caecb2a..387f367544464c73721219ec55cb42033f4bb9c3 100644
+--- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
++++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
+@@ -232,6 +232,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+             SIMDDetection.initialize();
+         } catch (Throwable ignored) {}
+         // Gale start - Pufferfish - SIMD support
++        org.dreeam.leaf.LeafConfig.load(); // Leaf
+ 
+         this.setPvpAllowed(dedicatedserverproperties.pvp);
+         this.setFlightAllowed(dedicatedserverproperties.allowFlight);
+diff --git a/src/main/java/org/dreeam/leaf/LeafConfig.java b/src/main/java/org/dreeam/leaf/LeafConfig.java
+new file mode 100644
+index 0000000000000000000000000000000000000000..d924db6378b2c60c7b96cf5c45a6d50a091f9790
+--- /dev/null
++++ b/src/main/java/org/dreeam/leaf/LeafConfig.java
+@@ -0,0 +1,171 @@
++package org.dreeam.leaf;
++
++import com.google.common.collect.ImmutableMap;
++import net.minecraft.server.MinecraftServer;
++import org.bukkit.configuration.ConfigurationSection;
++import org.bukkit.configuration.MemoryConfiguration;
++import org.jetbrains.annotations.Nullable;
++import org.simpleyaml.configuration.comments.CommentType;
++import org.simpleyaml.configuration.file.YamlFile;
++import org.simpleyaml.exceptions.InvalidConfigurationException;
++
++import java.io.File;
++import java.io.IOException;
++import java.lang.reflect.Method;
++import java.lang.reflect.Modifier;
++import java.util.List;
++import java.util.Map;
++
++public class LeafConfig {
++
++    private static final YamlFile config = new YamlFile();
++    private static int updates = 0;
++
++    private static ConfigurationSection convertToBukkit(org.simpleyaml.configuration.ConfigurationSection section) {
++        ConfigurationSection newSection = new MemoryConfiguration();
++        for (String key : section.getKeys(false)) {
++            if (section.isConfigurationSection(key)) {
++                newSection.set(key, convertToBukkit(section.getConfigurationSection(key)));
++            } else {
++                newSection.set(key, section.get(key));
++            }
++        }
++        return newSection;
++    }
++
++    public static ConfigurationSection getConfigCopy() {
++        return convertToBukkit(config);
++    }
++
++    public static int getUpdates() {
++        return updates;
++    }
++
++    public static void load() throws IOException {
++        File configFile = new File("leaf.yml");
++
++        if (configFile.exists()) {
++            try {
++                config.load(configFile);
++            } catch (InvalidConfigurationException e) {
++                throw new IOException(e);
++            }
++        }
++
++        getString("info.version", "1.2");
++        setComment("info",
++                "Beef Config",
++                "Github Repo: https://github.com/TheFafnir/Beef",
++                "Discord: TheFafnir);
++
++        for (Method method : LeafConfig.class.getDeclaredMethods()) {
++            if (Modifier.isStatic(method.getModifiers()) && Modifier.isPrivate(method.getModifiers()) && method.getParameterCount() == 0 &&
++                    method.getReturnType() == Void.TYPE && !method.getName().startsWith("lambda")) {
++                method.setAccessible(true);
++                try {
++                    method.invoke(null);
++                } catch (Throwable t) {
++                    MinecraftServer.LOGGER.warn("Failed to load configuration option from " + method.getName(), t);
++                }
++            }
++        }
++
++        updates++;
++
++        config.save(configFile);
++
++    }
++
++    private static void setComment(String key, String... comment) {
++        if (config.contains(key)) {
++            config.setComment(key, String.join("\n", comment), CommentType.BLOCK);
++        }
++    }
++
++    private static void ensureDefault(String key, Object defaultValue, String... comment) {
++        if (!config.contains(key)) {
++            config.set(key, defaultValue);
++            config.setComment(key, String.join("\n", comment), CommentType.BLOCK);
++        }
++    }
++
++    private static void set(String key, Object defaultValue) {
++        config.addDefault(key, defaultValue);
++        config.set(key, defaultValue);
++    }
++
++    private static boolean getBoolean(String key, boolean defaultValue, String... comment) {
++        return getBoolean(key, null, defaultValue, comment);
++    }
++
++    private static boolean getBoolean(String key, @Nullable String oldKey, boolean defaultValue, String... comment) {
++        ensureDefault(key, defaultValue, comment);
++        return config.getBoolean(key, defaultValue);
++    }
++
++    private static int getInt(String key, int defaultValue, String... comment) {
++        return getInt(key, null, defaultValue, comment);
++    }
++
++    private static int getInt(String key, @Nullable String oldKey, int defaultValue, String... comment) {
++        ensureDefault(key, defaultValue, comment);
++        return config.getInt(key, defaultValue);
++    }
++
++    private static double getDouble(String key, double defaultValue, String... comment) {
++        return getDouble(key, null, defaultValue, comment);
++    }
++
++    private static double getDouble(String key, @Nullable String oldKey, double defaultValue, String... comment) {
++        ensureDefault(key, defaultValue, comment);
++        return config.getDouble(key, defaultValue);
++    }
++
++    private static String getString(String key, String defaultValue, String... comment) {
++        return getOldString(key, null, defaultValue, comment);
++    }
++
++    private static String getOldString(String key, @Nullable String oldKey, String defaultValue, String... comment) {
++        ensureDefault(key, defaultValue, comment);
++        return config.getString(key, defaultValue);
++    }
++
++    private static List<String> getStringList(String key, List<String> defaultValue, String... comment) {
++        return getStringList(key, null, defaultValue, comment);
++    }
++
++    private static List<String> getStringList(String key, @Nullable String oldKey, List<String> defaultValue, String... comment) {
++        ensureDefault(key, defaultValue, comment);
++        return config.getStringList(key);
++    }
++
++    static Map<String, Object> getMap(String key, Map<String, Object> defaultValue) {
++        if (defaultValue != null && getConfigCopy().getConfigurationSection(key) == null) {
++            config.addDefault(key, defaultValue);
++            return defaultValue;
++        }
++        return toMap(getConfigCopy().getConfigurationSection(key));
++    }
++
++    private static Map<String, Object> toMap(ConfigurationSection section) {
++        ImmutableMap.Builder<String, Object> builder = ImmutableMap.builder();
++        if (section != null) {
++            for (String key : section.getKeys(false)) {
++                Object obj = section.get(key);
++                if (obj != null) {
++                    builder.put(key, obj instanceof ConfigurationSection val ? toMap(val) : obj);
++                }
++            }
++        }
++        return builder.build();
++    }
++
++    private static void removal() {
++    }
++
++    private static void performance() {
++    }
++
++    private static void network() {
++    }
++}
