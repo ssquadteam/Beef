@@ -35,7 +35,7 @@ index 88102f6ba8352a080125512d0bbfacdf779f4f38..1ea04a20247c7154fc3e59693f28b993
              // Only start Metrics, if it's enabled in the config
              if (config.getBoolean("enabled", true)) {
 -                Metrics metrics = new Metrics("Gale", serverUUID, logFailedRequests, Bukkit.getLogger()); // Gale - branding changes - metrics
-+                Metrics metrics = new Metrics("Leaf", serverUUID, logFailedRequests, Bukkit.getLogger()); // Gale - branding changes - metrics // Leaf - rebrand
++                Metrics metrics = new Metrics("Beef", serverUUID, logFailedRequests, Bukkit.getLogger()); // Gale - branding changes - metrics // Leaf - rebrand
  
                  metrics.addCustomChart(new Metrics.SimplePie("minecraft_version", () -> {
                      String minecraftVersion = Bukkit.getVersion();
@@ -49,7 +49,7 @@ index 88102f6ba8352a080125512d0bbfacdf779f4f38..1ea04a20247c7154fc3e59693f28b993
                  if (implVersion != null) {
                      final String buildOrHash = implVersion.substring(implVersion.lastIndexOf('-') + 1);
 -                    galeVersion = "git-Gale-%s-%s".formatted(Bukkit.getServer().getMinecraftVersion(), buildOrHash); // Gale - branding changes - metrics
-+                    leafVersion = "git-Leaf-%s-%s".formatted(Bukkit.getServer().getMinecraftVersion(), buildOrHash); // Gale - branding changes - metrics // Leaf - rebrand
++                    leafVersion = "git-Beef-%s-%s".formatted(Bukkit.getServer().getMinecraftVersion(), buildOrHash); // Gale - branding changes - metrics // Leaf - rebrand
                  } else {
 -                    galeVersion = "unknown"; // Gale - branding changes - metrics
 +                    leafVersion = "unknown"; // Gale - branding changes - metrics // Leaf - rebrand
@@ -68,7 +68,7 @@ index e45e6b44b2a8f2cdae6e0048a812b92126aa17ca..b5f3f213da8a40d5184098af017c8e26
      protected LineReader buildReader(LineReaderBuilder builder) {
          builder
 -                .appName("Gale") // Gale - branding changes
-+                .appName("Leaf") // Gale - branding changes // Leaf
++                .appName("Beef") // Gale - branding changes // Leaf
                  .variable(LineReader.HISTORY_FILE, java.nio.file.Paths.get(".console_history"))
                  .completer(new ConsoleCommandCompleter(this.server))
                  .option(LineReader.Option.COMPLETE_IN_WORD, true);
@@ -94,7 +94,7 @@ index 014cfa82cd35aa907040f9782bb534f60629bb9a..adcc3a2f2777b9810433bd9156f43c69
  
  public final class CraftServer implements Server {
 -    private final String serverName = "Gale"; // Paper // Gale - branding changes
-+    private final String serverName = "Leaf"; // Paper // Gale - branding changes // Leaf
++    private final String serverName = "Beef"; // Paper // Gale - branding changes // Leaf
      private final String serverVersion;
      private final String bukkitVersion = Versioning.getBukkitVersion();
      private final Logger logger = Logger.getLogger("Minecraft");
@@ -146,7 +146,7 @@ index 3d674eca7d20202d8f811c5c3e3946a12046028a..9f96c6a23372f496a5c71fda8c688d73
  
      public GaleVersionFetcher() {
 -        super("ver/1.20.2", "https://github.com/GaleMC/Gale", "Gale", "GaleMC", "GaleMC", "Gale");
-+        super("ver/1.20.2", "https://github.com/TheFafnir/Beef", "Leaf", "TheFafnir", "TheFafnir", "Leaf"); // Leaf
++        super("ver/1.20.2", "https://github.com/TheFafnir/Beef", "Beef", "TheFafnir", "TheFafnir", "Beef"); // Leaf
      }
  
  }
@@ -166,10 +166,10 @@ index 7e3efdc59ce2c84403d0c2b77c1c48f3e28a28a2..f82038f47074302bdd9a2e25110ac207
                  log.log( Level.SEVERE, "If you see a world save or edit, then it means you did far more than your server can handle at once" );
                  log.log( Level.SEVERE, "\t If this is the case, consider increasing timeout-time in spigot.yml but note that this will replace the crash with LARGE lag spikes" );
 -                log.log( Level.SEVERE, "If you are unsure or think this is a Gale bug, please report this to https://github.com/GaleMC/Gale/issues - and if you think this is a Paper bug, please report this to https://github.com/PaperMC/Paper/issues" ); // Gale - branding changes
-+                log.log( Level.SEVERE, "If you are unsure or think this is a Leaf bug, please report this to https://github.com/TheFafnir/Beef/issues - and if you think this is a Paper bug, please report this to https://github.com/PaperMC/Paper/issues" ); // Gale - branding changes // Leaf
++                log.log( Level.SEVERE, "If you are unsure or think this is a Beef bug, please report this to https://github.com/TheFafnir/Beef/issues - and if you think this is a Paper bug, please report this to https://github.com/PaperMC/Paper/issues" ); // Gale - branding changes // Leaf
                  log.log( Level.SEVERE, "Be sure to include ALL relevant console errors and Minecraft crash reports" );
 -                log.log( Level.SEVERE, "Gale version: " + Bukkit.getServer().getVersion() ); // Gale - branding changes
-+                log.log( Level.SEVERE, "Leaf version: " + Bukkit.getServer().getVersion() ); // Gale - branding changes // Leaf
++                log.log( Level.SEVERE, "Beef version: " + Bukkit.getServer().getVersion() ); // Gale - branding changes // Leaf
                  //
                  if ( net.minecraft.world.level.Level.lastPhysicsProblem != null )
                  {
@@ -178,14 +178,14 @@ index 7e3efdc59ce2c84403d0c2b77c1c48f3e28a28a2..f82038f47074302bdd9a2e25110ac207
                      but we do want people to report thread issues to Gale.
                       */
 -                    log.log(Level.SEVERE, "--- DO NOT REPORT THIS TO PAPER - If you think this is a Gale bug, please report it at https://github.com/GaleMC/Gale/issues - THIS IS NOT A PAPER BUG OR CRASH - " + Bukkit.getServer().getVersion() + " ---");
-+                    log.log(Level.SEVERE, "--- DO NOT REPORT THIS TO PAPER - If you think this is a Leaf bug, please report it at https://github.com/TheFafnir/Beef/issues - THIS IS NOT A PAPER BUG OR CRASH - " + Bukkit.getServer().getVersion() + " ---"); // Leaf
++                    log.log(Level.SEVERE, "--- DO NOT REPORT THIS TO PAPER - If you think this is a Beef bug, please report it at https://github.com/TheFafnir/Beef/issues - THIS IS NOT A PAPER BUG OR CRASH - " + Bukkit.getServer().getVersion() + " ---"); // Leaf
                      // Gale end - branding changes
                      log.log(Level.SEVERE, "The server has not responded for " + (currentTime - lastTick) / 1000 + " seconds! Creating thread dump");
                  }
                  // Paper end - Different message for short timeout
                  log.log( Level.SEVERE, "------------------------------" );
 -                log.log( Level.SEVERE, "Server thread dump (Look for plugins here before reporting to Gale!):" ); // Paper // Gale - branding changes
-+                log.log( Level.SEVERE, "Server thread dump (Look for plugins here before reporting to Leaf!):" ); // Paper // Gale - branding changes // Leaf
++                log.log( Level.SEVERE, "Server thread dump (Look for plugins here before reporting to Beef!):" ); // Paper // Gale - branding changes // Leaf
                  io.papermc.paper.chunk.system.scheduling.ChunkTaskScheduler.dumpAllChunkLoadInfo(isLongTimeout); // Paper - rewrite chunk system
                  this.dumpTickingInfo(); // Paper - log detailed tick information
                  WatchdogThread.dumpThread( ManagementFactory.getThreadMXBean().getThreadInfo( MinecraftServer.getServer().serverThread.getId(), Integer.MAX_VALUE ), log );
@@ -194,7 +194,7 @@ index 7e3efdc59ce2c84403d0c2b77c1c48f3e28a28a2..f82038f47074302bdd9a2e25110ac207
                      but we do want people to report thread issues to Gale.
                       */
 -                    log.log(Level.SEVERE, "--- DO NOT REPORT THIS TO PAPER - If you think this is a Gale bug, please report it at https://github.com/GaleMC/Gale/issues - THIS IS NOT A PAPER BUG OR CRASH ---");
-+                    log.log(Level.SEVERE, "--- DO NOT REPORT THIS TO PAPER - If you think this is a Leaf bug, please report it at https://github.com/TheFafnir/Beef/issues - THIS IS NOT A PAPER BUG OR CRASH ---"); // Leaf
++                    log.log(Level.SEVERE, "--- DO NOT REPORT THIS TO PAPER - If you think this is a Beef bug, please report it at https://github.com/TheFafnir/Beef/issues - THIS IS NOT A PAPER BUG OR CRASH ---"); // Leaf
                      // Gale end - branding changes
                  }
  
