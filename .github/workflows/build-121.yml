@@ -50,13 +50,3 @@ jobs:
         with:
           name: Beef 1.21
           path: ./beef-1.21-*.jar
-
-      - name: Release Beef
-        if: github.event_name != 'pull_request'
-        uses: marvinpinto/action-automatic-releases@master
-        with:
-          title: "Beef 1.21"
-          automatic_release_tag: "ver-1.21"
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          files: "./beef-1.21-*.jar"
-          prerelease: false
