@@ -1,0 +1,62 @@
+name: Build Beef 1.21
+
+on:
+  push:
+    branches: [ "dev/1.21" ]
+  pull_request:
+    branches: [ "dev/1.21" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@main
+      - uses: gradle/wrapper-validation-action@main
+      - name: Set up JDK
+        uses: graalvm/setup-graalvm@main
+        with:
+          java-version: 21
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
+          cache: gradle
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+      - name: Configure Git
+        run: git config --global user.email "no-reply@github.com" && git config --global user.name "Github Actions"
+
+      - name: Apply patches
+        run: ./gradlew -Dorg.gradle.jvmargs="-Dgraal.CompilerConfiguration=enterprise -Dgraal.UsePriorityInlining=true -Dgraal.Vectorization=true -Dgraal.OptDuplication=true --add-modules jdk.incubator.vector" applyPatches --stacktrace --no-daemon
+      - name: Create MojmapPaperclipJar
+        run: ./gradlew -Dorg.gradle.jvmargs="-Dgraal.CompilerConfiguration=enterprise -Dgraal.UsePriorityInlining=true -Dgraal.Vectorization=true -Dgraal.OptDuplication=true --add-modules jdk.incubator.vector" createMojmapPaperclipJar --stacktrace --no-daemon
+      - name: Create ReobfPaperclipJar
+        run: ./gradlew -Dorg.gradle.jvmargs="-Dgraal.CompilerConfiguration=enterprise -Dgraal.UsePriorityInlining=true -Dgraal.Vectorization=true -Dgraal.OptDuplication=true --add-modules jdk.incubator.vector" createReobfPaperclipJar --stacktrace --no-daemon
+
+      - name: Rename Paperclip Jar
+        run: |
+          mv build/libs/beef-paperclip-1.21-R0.1-SNAPSHOT-mojmap.jar ./beef-1.21-mojmap.jar
+          mv build/libs/beef-paperclip-1.21-R0.1-SNAPSHOT-reobf.jar ./beef-1.21-reobf.jar
+
+#      - name: Publish API
+#        if: github.event_name != 'pull_request'
+#        run: |
+#          ./gradlew :beef-api:publish
+#          ./gradlew publishDevBundlePublicationToBeefRepository -PpublishDevBundle=true
+#        env:
+#          ORG_GRADLE_PROJECT_beefUsername: ${{ secrets.REPO_USER }}
+#          ORG_GRADLE_PROJECT_beefPassword: ${{ secrets.REPO_PASSWORD }}
+
+      - name: Upload Beef
+        uses: actions/upload-artifact@main
+        with:
+          name: Beef 1.21
+          path: ./beef-1.21-*.jar
+
+      - name: Release Beef
+        if: github.event_name != 'pull_request'
+        uses: marvinpinto/action-automatic-releases@master
+        with:
+          title: "Beef 1.21"
+          automatic_release_tag: "ver-1.21"
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          files: "./beef-1.21-*.jar"
+          prerelease: false
