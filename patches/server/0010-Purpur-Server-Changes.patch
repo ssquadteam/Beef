@@ -172,7 +172,7 @@ index 023016de1732f0b299428ec0544128cc17407333..9d003c2ae45a057c0274a34fe5012cf1
      private static final String BRAND_PAPER_NAME = "Paper";
      private static final String BRAND_GALE_NAME = "Gale"; // Gale - branding changes
 +    private static final String BRAND_PURPUR_NAME = "Purpur"; // Purpur
-     private static final String BRAND_LEAF_NAME = "Leaf"; // Leaf
+     private static final String BRAND_LEAF_NAME = "Beef"; // Leaf
  
      private static final String BUILD_DEV = "DEV";
 diff --git a/src/main/java/io/papermc/paper/command/PaperPluginsCommand.java b/src/main/java/io/papermc/paper/command/PaperPluginsCommand.java
