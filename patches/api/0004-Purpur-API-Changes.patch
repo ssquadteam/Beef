@@ -6,7 +6,7 @@ Subject: [PATCH] Purpur API Changes
 Original license: MIT
 Original project: https://github.com/PurpurMC/Purpur
 
-Commit: 39617d5c9df0ed67f4b9c7cbcbc4f23a0dbae37e
+Commit: b2d1fea9bea1718e0abf5d7309d0cda7193e981e
 
 Patches below are removed in this patch:
 Pufferfish-API-Changes.patch
@@ -35,10 +35,10 @@ index 957f15a91f6aa1235c12b82079e32bb42449c78d..9fa8d7fac5bf415b40c3a9a38108fa54
      /**
       * The brand id for Leaf.
 diff --git a/src/main/java/org/bukkit/Bukkit.java b/src/main/java/org/bukkit/Bukkit.java
-index 1ea2a7f598c6a214a6562ce6ad2e49e83c7149ab..1a3808ed4bf57e1397a7e9c38ddf9f9f303022f6 100644
+index cd191a6039717c70d2b8be0ae475d040cad54f96..c7e2dd4465334ab845e931ed14fbfde43b6d4ea4 100644
 --- a/src/main/java/org/bukkit/Bukkit.java
 +++ b/src/main/java/org/bukkit/Bukkit.java
-@@ -2974,4 +2974,127 @@ public final class Bukkit {
+@@ -2977,4 +2977,127 @@ public final class Bukkit {
      public static Server.Spigot spigot() {
          return server.spigot();
      }
@@ -405,10 +405,10 @@ index 3993fecec5b4c2bbd77e175a168afcad571ce4d1..d0206c9c2f423a9b77237d9a005b9ee1
 +    // Purpur end - OfflinePlayer API
  }
 diff --git a/src/main/java/org/bukkit/Server.java b/src/main/java/org/bukkit/Server.java
-index 6d4ca47713fa10e39026f7ecede40ee6a2d4efad..27a060b772cc72b7952799b52f84f02a817e6574 100644
+index e72a7adee66a2843c49fc4b293b91ec5dba0bc65..c9049ac104a3b8c294223089425bd294a3928915 100644
 --- a/src/main/java/org/bukkit/Server.java
 +++ b/src/main/java/org/bukkit/Server.java
-@@ -2304,6 +2304,18 @@ public interface Server extends PluginMessageRecipient, net.kyori.adventure.audi
+@@ -2307,6 +2307,18 @@ public interface Server extends PluginMessageRecipient, net.kyori.adventure.audi
  
          // Paper end
  
@@ -427,7 +427,7 @@ index 6d4ca47713fa10e39026f7ecede40ee6a2d4efad..27a060b772cc72b7952799b52f84f02a
          // Leaf start
          @NotNull
          public org.bukkit.configuration.file.YamlConfiguration getLeafConfig()
-@@ -2627,4 +2639,104 @@ public interface Server extends PluginMessageRecipient, net.kyori.adventure.audi
+@@ -2630,4 +2642,104 @@ public interface Server extends PluginMessageRecipient, net.kyori.adventure.audi
      long getLastTickOversleepTime();
      // Gale end - YAPFA - last tick time - API
  
@@ -1108,10 +1108,10 @@ index 7fbfdb07585c7b28acea1f0c1f58ada0cc744441..21fcca092e2e31baa5ece0de9e44e3fa
 +    // Purpur end
  }
 diff --git a/src/main/java/org/bukkit/entity/Villager.java b/src/main/java/org/bukkit/entity/Villager.java
-index 48c8af31b2bdc849b5269784ff3829ba31fb3f47..431a62092380d30f27476eadbfa11833060e4a33 100644
+index 444744ea6f5921b0ae229995f8b15ea9d980c402..508bb3493e74a42ce8abf57bba05c08a715849dc 100644
 --- a/src/main/java/org/bukkit/entity/Villager.java
 +++ b/src/main/java/org/bukkit/entity/Villager.java
-@@ -328,4 +328,14 @@ public interface Villager extends AbstractVillager {
+@@ -375,4 +375,14 @@ public interface Villager extends AbstractVillager {
       */
      public void clearReputations();
      // Paper end
@@ -1177,10 +1177,10 @@ index 4b84c04675775e2a606630b00de8afe51665cebc..ccbaf40a3131f477b4be2264401ad893
 +    // Purpur end
  }
 diff --git a/src/main/java/org/bukkit/event/entity/EntityDamageEvent.java b/src/main/java/org/bukkit/event/entity/EntityDamageEvent.java
-index ca634147935c3bda8abad5dc73327e51381793a8..02c6a087dc41ffb004bcc20284135844188f8142 100644
+index ef5b2a0f18c1c126db0b0c4a4d2a57483680665a..e6c8ffc2583af754eaedc55160ef45c61c22e213 100644
 --- a/src/main/java/org/bukkit/event/entity/EntityDamageEvent.java
 +++ b/src/main/java/org/bukkit/event/entity/EntityDamageEvent.java
-@@ -303,7 +303,8 @@ public class EntityDamageEvent extends EntityEvent implements Cancellable {
+@@ -307,7 +307,8 @@ public class EntityDamageEvent extends EntityEvent implements Cancellable {
          WORLD_BORDER,
          /**
           * Damage caused when an entity contacts a block such as a Cactus,
@@ -1191,10 +1191,10 @@ index ca634147935c3bda8abad5dc73327e51381793a8..02c6a087dc41ffb004bcc20284135844
           * Damage: variable
           */
 diff --git a/src/main/java/org/bukkit/event/entity/EntityPotionEffectEvent.java b/src/main/java/org/bukkit/event/entity/EntityPotionEffectEvent.java
-index c95943a0c6a2cc7685b0e2601460d92fa1b4b2f5..30ee288c516eb4f532ae5b2550c4ee4957833396 100644
+index 8fdfcbc7d20fe0af6b220ab94516247093637621..f6a8928408e11a5ae723366e4ea1280dfcc6111e 100644
 --- a/src/main/java/org/bukkit/event/entity/EntityPotionEffectEvent.java
 +++ b/src/main/java/org/bukkit/event/entity/EntityPotionEffectEvent.java
-@@ -217,6 +217,12 @@ public class EntityPotionEffectEvent extends EntityEvent implements Cancellable
+@@ -216,6 +216,12 @@ public class EntityPotionEffectEvent extends EntityEvent implements Cancellable
           * When all effects are removed due to a bucket of milk.
           */
          MILK,
@@ -1240,7 +1240,7 @@ index c60be4fd24c7fdf65251dd6169e5e1ac3b588d95..569deccd2f1cf21da9b5906433ac493c
 +    // Purpur end
  }
 diff --git a/src/main/java/org/bukkit/inventory/ItemStack.java b/src/main/java/org/bukkit/inventory/ItemStack.java
-index 8bbd98ea729755e7666403b96f277fd419560951..cb37a8af9e54349fc8a3eb70bbe2fddaaa3767d6 100644
+index b3abe3bde05d4a360e31e490bff8a859dc2bd4a6..9b8b958ce181b60eb5db89d4720380153152a2ac 100644
 --- a/src/main/java/org/bukkit/inventory/ItemStack.java
 +++ b/src/main/java/org/bukkit/inventory/ItemStack.java
 @@ -19,6 +19,17 @@ import org.bukkit.inventory.meta.ItemMeta;
@@ -2414,14 +2414,106 @@ index 0000000000000000000000000000000000000000..519809eab5d926dc7b0a7bad5d446d0d
 +        return handlers;
 +    }
 +}
-diff --git a/src/main/java/org/purpurmc/purpur/event/PreBlockExplodeEvent.java b/src/main/java/org/purpurmc/purpur/event/PreBlockExplodeEvent.java
+diff --git a/src/main/java/org/purpurmc/purpur/event/PlayerSetTrialSpawnerTypeWithEggEvent.java b/src/main/java/org/purpurmc/purpur/event/PlayerSetTrialSpawnerTypeWithEggEvent.java
 new file mode 100644
-index 0000000000000000000000000000000000000000..8ea97ddceedb7c719e8a50a0dd8f3f0919ca1647
+index 0000000000000000000000000000000000000000..c8d206abf8f6a08f746322e63d198a368311f28d
 --- /dev/null
-+++ b/src/main/java/org/purpurmc/purpur/event/PreBlockExplodeEvent.java
-@@ -0,0 +1,53 @@
++++ b/src/main/java/org/purpurmc/purpur/event/PlayerSetTrialSpawnerTypeWithEggEvent.java
+@@ -0,0 +1,85 @@
 +package org.purpurmc.purpur.event;
 +
++import org.bukkit.block.Block;
++import org.bukkit.block.TrialSpawner;
++import org.bukkit.entity.EntityType;
++import org.bukkit.entity.Player;
++import org.bukkit.event.Cancellable;
++import org.bukkit.event.HandlerList;
++import org.bukkit.event.player.PlayerEvent;
++import org.jetbrains.annotations.NotNull;
++
++public class PlayerSetTrialSpawnerTypeWithEggEvent extends PlayerEvent implements Cancellable {
++    private static final HandlerList handlers = new HandlerList();
++    private final Block block;
++    private final TrialSpawner spawner;
++    private EntityType type;
++    private boolean cancel;
++
++    public PlayerSetTrialSpawnerTypeWithEggEvent(@NotNull Player player, @NotNull Block block, @NotNull TrialSpawner spawner, @NotNull EntityType type) {
++        super(player);
++        this.block = block;
++        this.spawner = spawner;
++        this.type = type;
++    }
++
++    /**
++     * Get the spawner Block in the world
++     *
++     * @return Spawner Block
++     */
++    @NotNull
++    public Block getBlock() {
++        return block;
++    }
++
++    /**
++     * Get the spawner state
++     *
++     * @return Spawner state
++     */
++    @NotNull
++    public TrialSpawner getSpawner() {
++        return spawner;
++    }
++
++    /**
++     * Gets the EntityType being set on the spawner
++     *
++     * @return EntityType being set
++     */
++    @NotNull
++    public EntityType getEntityType() {
++        return type;
++    }
++
++    /**
++     * Sets the EntityType being set on the spawner
++     *
++     * @param type EntityType to set
++     */
++    public void setEntityType(@NotNull EntityType type) {
++        this.type = type;
++    }
++
++    @Override
++    public boolean isCancelled() {
++        return cancel;
++    }
++
++    @Override
++    public void setCancelled(boolean cancel) {
++        this.cancel = cancel;
++    }
++
++    @Override
++    @NotNull
++    public HandlerList getHandlers() {
++        return handlers;
++    }
++
++    @NotNull
++    public static HandlerList getHandlerList() {
++        return handlers;
++    }
++}
+diff --git a/src/main/java/org/purpurmc/purpur/event/PreBlockExplodeEvent.java b/src/main/java/org/purpurmc/purpur/event/PreBlockExplodeEvent.java
+new file mode 100644
+index 0000000000000000000000000000000000000000..b22f28357bec72256b1f5f96e97d228d5882b4e0
+--- /dev/null
++++ b/src/main/java/org/purpurmc/purpur/event/PreBlockExplodeEvent.java
+@@ -0,0 +1,54 @@
++package org.purpurmc.purpur.event;
++
++import org.bukkit.ExplosionResult;
 +import org.bukkit.block.Block;
 +import org.bukkit.block.BlockState;
 +import org.bukkit.event.Cancellable;
@@ -2438,8 +2530,8 @@ index 0000000000000000000000000000000000000000..8ea97ddceedb7c719e8a50a0dd8f3f09
 +    private boolean cancelled;
 +    private final float yield;
 +
-+    public PreBlockExplodeEvent(@NotNull final Block what, final float yield, @NotNull BlockState explodedBlockState) {
-+        super(what, explodedBlockState, Collections.emptyList(), yield);
++    public PreBlockExplodeEvent(@NotNull final Block what, final float yield, @NotNull BlockState explodedBlockState, @NotNull ExplosionResult result) {
++        super(what, explodedBlockState, Collections.emptyList(), yield, result);
 +        this.yield = yield;
 +        this.cancelled = false;
 +    }
@@ -2943,12 +3035,13 @@ index 0000000000000000000000000000000000000000..c268c35b541a222d50875c29770c846a
 +}
 diff --git a/src/main/java/org/purpurmc/purpur/event/entity/PreEntityExplodeEvent.java b/src/main/java/org/purpurmc/purpur/event/entity/PreEntityExplodeEvent.java
 new file mode 100644
-index 0000000000000000000000000000000000000000..2d4f68228861492baaea0bcc604dfef623b337ba
+index 0000000000000000000000000000000000000000..bd5e647d52b2c69da684bb246325e0d6ca81f96e
 --- /dev/null
 +++ b/src/main/java/org/purpurmc/purpur/event/entity/PreEntityExplodeEvent.java
-@@ -0,0 +1,64 @@
+@@ -0,0 +1,65 @@
 +package org.purpurmc.purpur.event.entity;
 +
++import org.bukkit.ExplosionResult;
 +import org.bukkit.Location;
 +import org.bukkit.event.Cancellable;
 +import org.bukkit.event.HandlerList;
@@ -2965,8 +3058,8 @@ index 0000000000000000000000000000000000000000..2d4f68228861492baaea0bcc604dfef6
 +    private final float yield;
 +    private final Location location;
 +
-+    public PreEntityExplodeEvent(@NotNull org.bukkit.entity.Entity what, @NotNull final Location location, final float yield) {
-+        super(what, location, Collections.emptyList(), yield);
++    public PreEntityExplodeEvent(@NotNull org.bukkit.entity.Entity what, @NotNull final Location location, final float yield, @NotNull ExplosionResult result) {
++        super(what, location, Collections.emptyList(), yield, result);
 +        this.cancelled = false;
 +        this.yield = yield;
 +        this.location = location;
