@@ -5,13 +5,14 @@ plugins {
 }
 
 val paperMavenPublicUrl = "https://repo.papermc.io/repository/maven-public/"
+val leafMavenPublicUrl = "https://maven.nostal.ink/repository/maven-snapshots/"
 
 repositories {
     mavenCentral()
     maven(paperMavenPublicUrl) {
         content { onlyForConfigurations(configurations.paperclip.name) }
     }
-    maven("https://maven.nostal.ink/repository/maven-snapshots/")
+    maven(leafMavenPublicUrl) // Quantumleaper
 }
 
 dependencies {
@@ -46,13 +47,7 @@ subprojects {
     repositories {
         mavenCentral()
         maven(paperMavenPublicUrl)
-        maven("https://oss.sonatype.org/content/groups/public/")
-        maven("https://ci.emc.gs/nexus/content/groups/aikar/")
-        maven("https://repo.aikar.co/content/groups/aikar")
-        maven("https://repo.md-5.net/content/repositories/releases/")
-        maven("https://hub.spigotmc.org/nexus/content/groups/public/")
-        maven("https://jitpack.io")
-        maven("https://repo.codemc.io/repository/maven-public/")
+        maven("https://ci.pluginwiki.us/plugin/repository/everything/") // Leaf Config - ConfigurationMaster-API
     }
 }
 
@@ -92,6 +87,7 @@ tasks.generateDevelopmentBundle {
         listOf(
             "https://repo.maven.apache.org/maven2/",
             paperMavenPublicUrl,
+            leafMavenPublicUrl
         )
     )
 }
@@ -111,16 +107,10 @@ allprojects {
         repositories {
             maven {
                 name = "leaf"
-                url = uri("https://maven.pkg.github.com/Winds-Studio/Leaf")
+                url = uri(leafMavenPublicUrl)
 
-                credentials.username = System.getenv("REPO_PASSWORD")
-                credentials.password = System.getenv("REPO_USER")
-            }
-
-            publications {
-                register<MavenPublication>("gpr") {
-                    from(components["java"])
-                }
+                credentials.username = System.getenv("REPO_USER")
+                credentials.password = System.getenv("REPO_PASSWORD")
             }
         }
     }
