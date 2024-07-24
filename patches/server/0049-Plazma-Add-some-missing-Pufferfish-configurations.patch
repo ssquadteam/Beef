@@ -1,0 +1,73 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: AlphaKR93 <dev@alpha93.kr>
+Date: Wed, 27 Sep 2023 18:29:51 +0900
+Subject: [PATCH] Plazma: Add some missing Pufferfish configurations
+
+Original license: MIT
+Original project: https://github.com/PlazmaMC/PlazmaBukkit
+
+Add Pufferfish DAB support for Camel, Sniffer
+https://github.com/pufferfish-gg/Pufferfish/issues/83
+
+diff --git a/src/main/java/net/minecraft/world/entity/animal/armadillo/Armadillo.java b/src/main/java/net/minecraft/world/entity/animal/armadillo/Armadillo.java
+index e696d2a0b12c520b3ae82443107af678e9e36c22..253a5a814cdd6e7090ced4f92447dd4c49a66bad 100644
+--- a/src/main/java/net/minecraft/world/entity/animal/armadillo/Armadillo.java
++++ b/src/main/java/net/minecraft/world/entity/animal/armadillo/Armadillo.java
+@@ -161,8 +161,10 @@ public class Armadillo extends Animal {
+         return ArmadilloAi.makeBrain(this.brainProvider().makeBrain(dynamic));
+     }
+ 
++    private int behaviorTick; // Leaf - Plazma - Add missing Pufferfish configurations
+     @Override
+     protected void customServerAiStep() {
++        if (this.behaviorTick++ % this.activatedPriority == 0) // Leaf - Plazma - Add missing Pufferfish configurations
+         ((Brain<Armadillo>) this.brain).tick((ServerLevel) this.level(), this); // CraftBukkit - decompile error
+         ArmadilloAi.updateActivity(this);
+         if (this.isAlive() && !this.isBaby() && --this.scuteTime <= 0) {
+diff --git a/src/main/java/net/minecraft/world/entity/animal/camel/Camel.java b/src/main/java/net/minecraft/world/entity/animal/camel/Camel.java
+index 5a704a4c815e6670c93c750bc9f0e22100cd6923..608a22551c344d8a9e666386f913fa9ad360a18d 100644
+--- a/src/main/java/net/minecraft/world/entity/animal/camel/Camel.java
++++ b/src/main/java/net/minecraft/world/entity/animal/camel/Camel.java
+@@ -152,10 +152,12 @@ public class Camel extends AbstractHorse implements PlayerRideableJumping, Saddl
+         return pose == Pose.SITTING ? Camel.SITTING_DIMENSIONS.scale(this.getAgeScale()) : super.getDefaultDimensions(pose);
+     }
+ 
++    private int behaviorTick = 0; // Leaf - Plazma - Add missing Pufferfish configurations
+     @Override
+     protected void customServerAiStep() {
+         Brain<Camel> behaviorcontroller = (Brain<Camel>) this.getBrain(); // CraftBukkit - decompile error
+ 
++        if (this.behaviorTick++ % this.activatedPriority == 0) // Leaf - Plazma - Add missing Pufferfish configurations
+         behaviorcontroller.tick((ServerLevel) this.level(), this);
+         CamelAi.updateActivity(this);
+         super.customServerAiStep();
+diff --git a/src/main/java/net/minecraft/world/entity/animal/sniffer/Sniffer.java b/src/main/java/net/minecraft/world/entity/animal/sniffer/Sniffer.java
+index bab2230f1cf8baa122595f4e48f58d405bedd09d..8c2038e154730b1f796ab34f2555dc88fd542173 100644
+--- a/src/main/java/net/minecraft/world/entity/animal/sniffer/Sniffer.java
++++ b/src/main/java/net/minecraft/world/entity/animal/sniffer/Sniffer.java
+@@ -503,8 +503,10 @@ public class Sniffer extends Animal {
+         return Brain.provider(SnifferAi.MEMORY_TYPES, SnifferAi.SENSOR_TYPES);
+     }
+ 
++    private int behaviorTick; // Leaf - Plazma - Add missing Pufferfish configurations
+     @Override
+     protected void customServerAiStep() {
++        if (this.behaviorTick++ % this.activatedPriority == 0) // Leaf - Plazma - Add missing Pufferfish configurations
+         this.getBrain().tick((ServerLevel) this.level(), this);
+         SnifferAi.updateActivity(this);
+         super.customServerAiStep();
+diff --git a/src/main/java/net/minecraft/world/entity/monster/breeze/Breeze.java b/src/main/java/net/minecraft/world/entity/monster/breeze/Breeze.java
+index afe1e0518be486c7e3c3103fc66980b5c234c1ac..3f740d511e2380214dbaf70cd0304db867f51cb1 100644
+--- a/src/main/java/net/minecraft/world/entity/monster/breeze/Breeze.java
++++ b/src/main/java/net/minecraft/world/entity/monster/breeze/Breeze.java
+@@ -226,8 +226,10 @@ public class Breeze extends Monster {
+         return pos.closerThan(vec3, 4.0, 10.0);
+     }
+ 
++    private int behaviorTick; // Leaf - Plazma - Add missing Pufferfish configurations
+     @Override
+     protected void customServerAiStep() {
++        if (this.behaviorTick++ % this.activatedPriority == 0) // Leaf - Plazma - Add missing Pufferfish configurations
+         this.getBrain().tick((ServerLevel)this.level(), this);
+         BreezeAi.updateActivity(this);
+         super.customServerAiStep();
