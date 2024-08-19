@@ -48,5 +48,5 @@ jobs:
       - name: Upload Beef
         uses: actions/upload-artifact@main
         with:
-          name: Beef 1.21
+          name: Beef 1.21.1
           path: ./beef-1.21.1-*.jar
