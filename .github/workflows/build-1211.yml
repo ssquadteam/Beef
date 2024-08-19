@@ -2,9 +2,9 @@ name: Build Beef 1.21.1
 
 on:
   push:
-    branches: [ "dev/1.21.1" ]
+    branches: [ "ver/1.21.1" ]
   pull_request:
-    branches: [ "dev/1.21.1" ]
+    branches: [ "ver/1.21.1" ]
 
 jobs:
   build:
@@ -36,17 +36,12 @@ jobs:
           mv build/libs/beef-paperclip-1.21.1-R0.1-SNAPSHOT-mojmap.jar ./beef-1.21.1-mojmap.jar
           mv build/libs/beef-paperclip-1.21.1-R0.1-SNAPSHOT-reobf.jar ./beef-1.21.1-reobf.jar
 
-#      - name: Publish API
-#        if: github.event_name != 'pull_request'
-#        run: |
-#          ./gradlew :beef-api:publish
-#          ./gradlew publishDevBundlePublicationToBeefRepository -PpublishDevBundle=true
-#        env:
-#          ORG_GRADLE_PROJECT_beefUsername: ${{ secrets.REPO_USER }}
-#          ORG_GRADLE_PROJECT_beefPassword: ${{ secrets.REPO_PASSWORD }}
-
       - name: Upload Beef
         uses: actions/upload-artifact@main
         with:
           name: Beef 1.21.1
           path: ./beef-1.21.1-*.jar
+
+      - name: Rename Paperclip Jar
+        run: |
+          mv ./beef-1.21.1-mojmap.jar ./beef-1.21.1.jar
