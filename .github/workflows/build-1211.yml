@@ -2,9 +2,9 @@ name: Build Beef 1.21.1
 
 on:
   push:
-    branches: [ "ver/1.21.1" ]
+    branches: [ "dev/1.21.1" ]
   pull_request:
-    branches: [ "ver/1.21.1" ]
+    branches: [ "dev/1.21.1" ]
 
 jobs:
   build:
