@@ -1,10 +1,10 @@
-name: Build Beef 1.21
+name: Build Beef 1.21.1
 
 on:
   push:
-    branches: [ "dev/1.21" ]
+    branches: [ "dev/1.21.1" ]
   pull_request:
-    branches: [ "dev/1.21" ]
+    branches: [ "dev/1.21.1" ]
 
 jobs:
   build:
@@ -33,8 +33,8 @@ jobs:
 
       - name: Rename Paperclip Jar
         run: |
-          mv build/libs/beef-paperclip-1.21-R0.1-SNAPSHOT-mojmap.jar ./beef-1.21-mojmap.jar
-          mv build/libs/beef-paperclip-1.21-R0.1-SNAPSHOT-reobf.jar ./beef-1.21-reobf.jar
+          mv build/libs/beef-paperclip-1.21.1-R0.1-SNAPSHOT-mojmap.jar ./beef-1.21.1-mojmap.jar
+          mv build/libs/beef-paperclip-1.21.1-R0.1-SNAPSHOT-reobf.jar ./beef-1.21.1-reobf.jar
 
 #      - name: Publish API
 #        if: github.event_name != 'pull_request'
@@ -49,4 +49,4 @@ jobs:
         uses: actions/upload-artifact@main
         with:
           name: Beef 1.21
-          path: ./beef-1.21-*.jar
+          path: ./beef-1.21.1-*.jar
