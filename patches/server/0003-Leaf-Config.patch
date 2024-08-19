@@ -15,7 +15,7 @@ index a79693afc8c21448a4134f730eff910e1b88e2a8..ca9f19c451155e3b411171f757ed9fee
 --- a/build.gradle.kts
 +++ b/build.gradle.kts
 @@ -14,6 +14,13 @@ val alsoShade: Configuration by configurations.creating
-
+ 
  dependencies {
      implementation(project(":leaf-api")) // Gale start - project setup - Depend on own API // Leaf
 +
@@ -39,7 +39,7 @@ index 278adb48400ca9d4fd37bff040b37d4a8dd47282..759b22fc6f949829cef757232357368e
 +            org.dreeam.leaf.config.LeafConfig.loadConfig(); // Leaf
              Path path1 = Paths.get("server.properties");
              DedicatedServerSettings dedicatedserversettings = new DedicatedServerSettings(optionset); // CraftBukkit - CLI argument support
-
+ 
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
 index f4dd63ae1a9715f3cd10949ca49a269897443e56..1e18635c78ee73fab352465e56f2dc827ae8337a 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
@@ -407,9 +407,10 @@ index 0000000000000000000000000000000000000000..6685386a36c469827c646ce9cea914de
 +            configFile = ConfigFile.loadConfig(new File(LeafConfig.I_CONFIG_FOLDER, LeafConfig.I_GLOBAL_CONFIG_FILE));
 +            configFile.set("config-version", 3.0);
 +            configFile.addComments("config-version", """
-+                    Beef Config
-+                    Github Repo: https://github.com/The-Fafnir/Beef
-+                    Discord: .thefafnir""");
++                    Leaf Config
++                    Github Repo: https://github.com/Winds-Studio/Leaf
++                    Discord: https://discord.com/invite/gfgAwdSEuM
++                    QQ Group: 715128273""");
 +
 +            // Pre-structure to force order
 +            structureConfig();
